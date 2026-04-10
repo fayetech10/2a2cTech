@@ -376,8 +376,8 @@ export const navigation = [
 // ── Contact info ──────────────────────────────────
 export const contactInfo = {
   email: 'contact@2a2ctech.com',
-  whatsapp: '+221 77 000 0000',
-  whatsappLink: 'https://wa.me/221770000000',
+  whatsapp: '+221 77 3394513',
+  whatsappLink: 'https://wa.me/221773394513',
   adresse: 'Dakar, Sénégal',
   mapsQuery: 'Dakar Sénégal',
 }
