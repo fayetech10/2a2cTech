@@ -1,383 +1,390 @@
 import {
-  Wrench,
-  Palette,
-  Globe,
-  Smartphone,
-  ShoppingCart,
-  Sparkles,
-  Cloud,
-  Search,
-  TrendingUp,
-  Shield,
+  Antenna,
+  BadgeCheck,
+  BriefcaseBusiness,
+  Code2,
+  Cpu,
   GraduationCap,
+  Layers3,
+  MonitorCog,
+  Network,
+  Palette,
+  ShieldCheck,
+  Sparkles,
+  Wrench,
+  Workflow,
 } from 'lucide-react'
 
-// ── Services (chaque service a un gradient unique) ──
-export const services = [
-  {
-    id: 'maintenance',
-    icon: Wrench,
-    gradient: 'from-blue-500 to-cyan-400',
-    bgGlow: 'bg-blue-500/20',
-    titre: 'Maintenance informatique',
-    description: 'Réparation, installation, dépannage et optimisation de vos systèmes pour un parc toujours performant.',
-    longDescription: 'Notre service de maintenance informatique assure le bon fonctionnement de votre parc matériel et logiciel. Nous intervenons rapidement pour résoudre les pannes, prévenir les dysfonctionnements et optimiser les performances de vos équipements. Que ce soit pour un poste individuel ou un réseau d\'entreprise complet, notre équipe technique est disponible pour garantir la continuité de vos activités.',
-    features: [
-      'Diagnostic et réparation matérielle (PC, imprimantes, périphériques)',
-      'Installation et configuration de systèmes d\'exploitation (Windows, Linux, macOS)',
-      'Mise à jour et optimisation des logiciels et pilotes',
-      'Nettoyage et désinfection virale',
-      'Sauvegarde et récupération de données',
-      'Contrats de maintenance préventive',
-    ],
-    technologies: ['Windows Server', 'Linux', 'Active Directory', 'GLPI', 'TeamViewer'],
-    processSteps: [
-      { step: 'Diagnostic', desc: 'Analyse complète du problème et identification des causes' },
-      { step: 'Devis', desc: 'Proposition de solution avec estimation du coût et du délai' },
-      { step: 'Intervention', desc: 'Réparation sur site ou à distance selon le besoin' },
-      { step: 'Suivi', desc: 'Vérification post-intervention et rapport technique' },
-    ],
-    benefits: ['Réduction des temps d\'arrêt', 'Prolongation de la durée de vie des équipements', 'Économies sur les coûts de remplacement'],
-  },
-  {
-    id: 'infographie',
-    icon: Palette,
-    gradient: 'from-pink-500 to-rose-400',
-    bgGlow: 'bg-pink-500/20',
-    titre: 'Infographie',
-    description: 'Création de logos, affiches, flyers et identités visuelles cohérentes qui marquent les esprits.',
-    longDescription: 'Notre studio créatif conçoit des supports visuels percutants qui renforcent l\'image de votre marque. Du logo à la charte graphique complète, en passant par les supports print et digitaux, nous créons des designs qui communiquent vos valeurs et captent l\'attention de votre audience cible.',
-    features: [
-      'Création de logos et identités visuelles complètes',
-      'Design d\'affiches, flyers, brochures et cartes de visite',
-      'Charte graphique (couleurs, typographies, règles d\'utilisation)',
-      'Visuels pour réseaux sociaux (posts, stories, bannières)',
-      'Packaging et étiquetage produit',
-      'Retouche et montage photo professionnel',
-    ],
-    technologies: ['Adobe Photoshop', 'Adobe Illustrator', 'InDesign', 'Figma', 'Canva Pro'],
-    processSteps: [
-      { step: 'Brief créatif', desc: 'Compréhension de votre marque, vos valeurs et votre cible' },
-      { step: 'Moodboard', desc: 'Proposition de direction artistique et références visuelles' },
-      { step: 'Création', desc: 'Design de 2 à 3 propositions créatives' },
-      { step: 'Livraison', desc: 'Fichiers finaux en haute résolution dans tous les formats' },
-    ],
-    benefits: ['Image de marque professionnelle', 'Cohérence visuelle sur tous vos supports', 'Différenciation face à la concurrence'],
-  },
-  {
-    id: 'web',
-    icon: Globe,
-    gradient: 'from-primary to-violet',
-    bgGlow: 'bg-primary/20',
-    titre: 'Développement web',
-    description: 'Sites vitrines, plateformes métier et applications SaaS performantes et sur mesure.',
-    longDescription: 'Nous développons des solutions web sur mesure, adaptées à vos objectifs business. De la landing page au portail métier complexe, en passant par les applications SaaS, nous maîtrisons les technologies modernes pour créer des plateformes rapides, sécurisées et évolutives qui convertissent vos visiteurs en clients.',
-    features: [
-      'Sites vitrines modernes et responsive design',
-      'Applications web métier (CRM, ERP, dashboards)',
-      'Plateformes SaaS multi-tenants',
-      'API RESTful et intégrations tierces',
-      'Systèmes d\'authentification et gestion des rôles',
-      'Optimisation des performances et temps de chargement',
-    ],
-    technologies: ['React', 'Next.js', 'Angular', 'Spring Boot', 'Node.js', 'PostgreSQL', 'MongoDB', 'Tailwind CSS'],
-    processSteps: [
-      { step: 'Analyse', desc: 'Étude des besoins fonctionnels et techniques' },
-      { step: 'Maquettage', desc: 'Design UI/UX et validation du parcours utilisateur' },
-      { step: 'Développement', desc: 'Codage en sprints agiles avec démonstrations régulières' },
-      { step: 'Déploiement', desc: 'Mise en production, tests et formation utilisateurs' },
-    ],
-    benefits: ['Présence en ligne professionnelle 24h/24', 'Automatisation des processus métier', 'Acquisition de nouveaux clients via le web'],
-  },
-  {
-    id: 'mobile',
-    icon: Smartphone,
-    gradient: 'from-violet to-purple-400',
-    bgGlow: 'bg-violet/20',
-    titre: 'Développement mobile',
-    description: 'Applications Android et iOS fluides, modernes et évolutives pour vos utilisateurs.',
-    longDescription: 'Nous concevons des applications mobiles natives et cross-platform qui offrent une expérience utilisateur fluide et intuitive. Que vous cibliez Android, iOS ou les deux plateformes, nous développons des apps performantes avec des fonctionnalités avancées : notifications push, géolocalisation, paiement mobile et synchronisation en temps réel.',
-    features: [
-      'Applications natives Android (Kotlin/Java) et iOS (Swift)',
-      'Applications cross-platform avec React Native et Flutter',
-      'Intégration de notifications push et messagerie temps réel',
-      'Géolocalisation et cartographie interactive',
-      'Paiement mobile (Wave, Orange Money, cartes bancaires)',
-      'Publication sur Google Play Store et Apple App Store',
-    ],
-    technologies: ['React Native', 'Flutter', 'Kotlin', 'Swift', 'Firebase', 'Expo', 'REST API'],
-    processSteps: [
-      { step: 'Prototype', desc: 'Maquettes interactives et validation du concept' },
-      { step: 'Développement', desc: 'Codage itératif avec tests sur appareils réels' },
-      { step: 'Beta testing', desc: 'Tests utilisateurs et correction des retours' },
-      { step: 'Publication', desc: 'Déploiement sur les stores et suivi post-lancement' },
-    ],
-    benefits: ['Accessibilité mobile pour vos clients', 'Engagement utilisateur renforcé', 'Canal de communication direct via notifications'],
-  },
-  {
-    id: 'ecommerce',
-    icon: ShoppingCart,
-    gradient: 'from-emerald-500 to-teal-400',
-    bgGlow: 'bg-emerald-500/20',
-    titre: 'Création e-commerce',
-    description: 'Boutiques en ligne optimisées pour vendre et fidéliser vos clients efficacement.',
-    longDescription: 'Nous créons des boutiques en ligne complètes et optimisées pour maximiser vos ventes. De la présentation produit au tunnel de conversion, en passant par l\'intégration des moyens de paiement locaux et internationaux, nous développons des plateformes e-commerce qui transforment vos visiteurs en acheteurs fidèles.',
-    features: [
-      'Catalogue produits avec filtres et recherche avancée',
-      'Panier d\'achat et tunnel de conversion optimisé',
-      'Intégration paiement mobile (Wave, Orange Money) et carte bancaire',
-      'Gestion des stocks, commandes et livraisons',
-      'Espace client avec suivi de commande en temps réel',
-      'Tableau de bord vendeur avec analytics et rapports',
-    ],
-    technologies: ['Next.js', 'WooCommerce', 'Shopify', 'Stripe', 'PayPal', 'MySQL', 'Tailwind CSS'],
-    processSteps: [
-      { step: 'Stratégie', desc: 'Analyse du marché, des concurrents et du positionnement' },
-      { step: 'Design', desc: 'Création de l\'expérience d\'achat et des pages produits' },
-      { step: 'Intégration', desc: 'Développement, paiement et logistique' },
-      { step: 'Lancement', desc: 'Mise en ligne, SEO et premières campagnes marketing' },
-    ],
-    benefits: ['Ventes 24h/24 sans limitation géographique', 'Réduction des coûts opérationnels', 'Données clients pour le marketing ciblé'],
-  },
-  {
-    id: 'uiux',
-    icon: Sparkles,
-    gradient: 'from-amber-500 to-orange-400',
-    bgGlow: 'bg-amber-500/20',
-    titre: 'UI/UX Design',
-    description: 'Maquettes modernes sur Figma, parcours clairs et expérience utilisateur engageante.',
-    longDescription: 'Notre équipe design crée des interfaces intuitives et esthétiques centrées sur l\'utilisateur. Nous réalisons des recherches UX approfondies, des wireframes, des prototypes interactifs et des maquettes haute fidélité qui garantissent une expérience fluide et engageante pour vos utilisateurs finaux.',
-    features: [
-      'Audit UX et analyse des parcours utilisateurs existants',
-      'Wireframes et architecture de l\'information',
-      'Maquettes haute fidélité sur Figma',
-      'Prototypes interactifs et tests utilisateurs',
-      'Design system et bibliothèque de composants',
-      'Responsive design (mobile, tablette, desktop)',
-    ],
-    technologies: ['Figma', 'Adobe XD', 'Framer', 'Maze', 'Hotjar', 'Google Analytics'],
-    processSteps: [
-      { step: 'Recherche', desc: 'Interviews utilisateurs, analyse concurrentielle et personas' },
-      { step: 'Wireframes', desc: 'Structure des pages et flux de navigation' },
-      { step: 'Design', desc: 'Maquettes visuelles avec votre charte graphique' },
-      { step: 'Validation', desc: 'Tests utilisateurs et itérations finales' },
-    ],
-    benefits: ['Taux de conversion amélioré', 'Satisfaction utilisateur maximisée', 'Réduction des coûts de développement grâce au prototypage'],
-  },
-  {
-    id: 'hosting',
-    icon: Cloud,
-    gradient: 'from-sky-500 to-blue-400',
-    bgGlow: 'bg-sky-500/20',
-    titre: 'Hébergement & déploiement',
-    description: 'Serveur, cloud et DevOps pour un lancement stable, sécurisé et scalable.',
-    longDescription: 'Nous assurons l\'hébergement, le déploiement et la gestion de vos applications sur des infrastructures cloud modernes et sécurisées. De la configuration du serveur au monitoring 24h/24, en passant par l\'automatisation des déploiements, nous garantissons la disponibilité et les performances de vos services en ligne.',
-    features: [
-      'Hébergement cloud haute disponibilité (AWS, DigitalOcean, Render)',
-      'Configuration de serveurs et environnements de production',
-      'CI/CD (déploiement continu automatisé)',
-      'Certificats SSL et sécurisation HTTPS',
-      'Monitoring et alertes en temps réel',
-      'Sauvegardes automatiques et plan de reprise d\'activité',
-    ],
-    technologies: ['AWS', 'DigitalOcean', 'Render', 'Docker', 'Nginx', 'GitHub Actions', 'Let\'s Encrypt'],
-    processSteps: [
-      { step: 'Audit', desc: 'Évaluation des besoins en performance et sécurité' },
-      { step: 'Setup', desc: 'Configuration de l\'infrastructure et des pipelines' },
-      { step: 'Migration', desc: 'Transfert de données et mise en production' },
-      { step: 'Monitoring', desc: 'Surveillance continue et optimisation des performances' },
-    ],
-    benefits: ['Disponibilité 99.9% garantie', 'Déploiements sans interruption de service', 'Scalabilité automatique en cas de pic de trafic'],
-  },
-  {
-    id: 'seo',
-    icon: Search,
-    gradient: 'from-lime-500 to-green-400',
-    bgGlow: 'bg-lime-500/20',
-    titre: 'Référencement SEO',
-    description: 'Optimisation technique et contenu pour mieux se positionner sur Google.',
-    longDescription: 'Notre service SEO vise à améliorer la visibilité de votre site web dans les résultats de recherche Google. Nous réalisons un audit technique complet, optimisons votre contenu et développons une stratégie de netlinking pour vous positionner sur les mots-clés stratégiques de votre secteur d\'activité.',
-    features: [
-      'Audit SEO technique complet (vitesse, structure, indexation)',
-      'Recherche de mots-clés et analyse de la concurrence',
-      'Optimisation on-page (balises, contenus, maillage interne)',
-      'Optimisation technique (Core Web Vitals, sitemap, robots.txt)',
-      'Stratégie de netlinking et backlinks de qualité',
-      'Rapports mensuels de positionnement et analytics',
-    ],
-    technologies: ['Google Search Console', 'Google Analytics', 'Semrush', 'Ahrefs', 'Screaming Frog', 'PageSpeed Insights'],
-    processSteps: [
-      { step: 'Audit', desc: 'Analyse complète de l\'état SEO actuel du site' },
-      { step: 'Stratégie', desc: 'Plan d\'action priorisé avec mots-clés cibles' },
-      { step: 'Optimisation', desc: 'Implémentation des corrections techniques et éditoriales' },
-      { step: 'Suivi', desc: 'Rapports mensuels et ajustements continus' },
-    ],
-    benefits: ['Trafic organique qualifié et durable', 'Meilleur retour sur investissement que la publicité', 'Crédibilité et autorité de votre marque en ligne'],
-  },
-  {
-    id: 'marketing',
-    icon: TrendingUp,
-    gradient: 'from-fuchsia-500 to-pink-400',
-    bgGlow: 'bg-fuchsia-500/20',
-    titre: 'Marketing digital',
-    description: 'Réseaux sociaux, publicité et campagnes pour accélérer votre croissance.',
-    longDescription: 'Nous élaborons et exécutons des stratégies de marketing digital complètes pour augmenter votre visibilité, générer des leads qualifiés et fidéliser vos clients. De la gestion de vos réseaux sociaux à la publicité payante, en passant par l\'email marketing, nous mettons en place les leviers adaptés à votre budget et vos objectifs.',
-    features: [
-      'Gestion et animation des réseaux sociaux (Facebook, Instagram, LinkedIn, TikTok)',
-      'Publicité payante (Facebook Ads, Google Ads, Instagram Ads)',
-      'Email marketing et campagnes d\'automation',
-      'Création de contenu (visuels, vidéos, articles de blog)',
-      'Community management et gestion de la e-réputation',
-      'Analyse de performance et reporting détaillé',
-    ],
-    technologies: ['Meta Business Suite', 'Google Ads', 'Mailchimp', 'Hootsuite', 'Google Analytics', 'Canva'],
-    processSteps: [
-      { step: 'Audit', desc: 'Analyse de votre présence digitale actuelle' },
-      { step: 'Stratégie', desc: 'Définition des objectifs, cibles et canaux prioritaires' },
-      { step: 'Exécution', desc: 'Création et diffusion des campagnes sur les canaux choisis' },
-      { step: 'Optimisation', desc: 'Analyse des résultats et ajustement en continu' },
-    ],
-    benefits: ['Augmentation de la notoriété de marque', 'Génération de leads qualifiés', 'ROI mesurable sur chaque campagne'],
-  },
-  {
-    id: 'security',
-    icon: Shield,
-    gradient: 'from-red-500 to-orange-400',
-    bgGlow: 'bg-red-500/20',
-    titre: 'Sécurité informatique',
-    description: 'Protection des données, audits et bonnes pratiques de cybersécurité.',
-    longDescription: 'Nous protégeons votre entreprise contre les cybermenaces avec une approche globale de la sécurité informatique. De l\'audit de vulnérabilités à la mise en place de politiques de sécurité, en passant par la formation de vos équipes, nous mettons en œuvre les mesures nécessaires pour sécuriser vos données, vos systèmes et vos communications.',
-    features: [
-      'Audit de sécurité et tests de pénétration (pentest)',
-      'Mise en place de pare-feux et systèmes de détection d\'intrusion',
-      'Chiffrement des données sensibles et communications',
-      'Gestion des accès et authentification multi-facteurs (MFA)',
-      'Plan de réponse aux incidents et continuité d\'activité',
-      'Conformité RGPD et réglementations locales',
-    ],
-    technologies: ['Kali Linux', 'Nmap', 'Wireshark', 'Metasploit', 'pfSense', 'ClamAV', 'OpenVPN'],
-    processSteps: [
-      { step: 'Audit', desc: 'Évaluation complète des vulnérabilités de votre infrastructure' },
-      { step: 'Recommandations', desc: 'Rapport détaillé avec plan d\'action priorisé' },
-      { step: 'Implémentation', desc: 'Mise en place des solutions de sécurité' },
-      { step: 'Monitoring', desc: 'Surveillance continue et mises à jour de sécurité' },
-    ],
-    benefits: ['Protection contre les cyberattaques et ransomwares', 'Conformité réglementaire', 'Confiance renforcée auprès de vos clients et partenaires'],
-  },
-  {
-    id: 'formation',
-    icon: GraduationCap,
-    gradient: 'from-indigo-500 to-blue-400',
-    bgGlow: 'bg-indigo-500/20',
-    titre: 'Formation informatique',
-    description: 'Formations débutant et avancé pour renforcer les compétences de vos équipes.',
-    longDescription: 'Nous proposons des formations informatiques adaptées à tous les niveaux, du débutant au professionnel confirmé. Nos formateurs qualifiés utilisent une pédagogie pratique et interactive pour transmettre des compétences directement applicables en entreprise. Formations individuelles ou en groupe, en présentiel ou à distance.',
-    features: [
-      'Bureautique (Word, Excel, PowerPoint, Google Workspace)',
-      'Initiation à la programmation (HTML, CSS, JavaScript, Python)',
-      'Administration système et réseau',
-      'Cybersécurité pour les utilisateurs (sensibilisation)',
-      'Marketing digital et réseaux sociaux',
-      'Formations sur mesure adaptées à vos besoins spécifiques',
-    ],
-    technologies: ['Microsoft Office', 'Google Workspace', 'Python', 'JavaScript', 'Cisco', 'VMware'],
-    processSteps: [
-      { step: 'Évaluation', desc: 'Analyse du niveau actuel et des objectifs de formation' },
-      { step: 'Programme', desc: 'Création d\'un cursus personnalisé avec supports de cours' },
-      { step: 'Formation', desc: 'Sessions pratiques avec exercices et projets concrets' },
-      { step: 'Certification', desc: 'Évaluation finale et attestation de formation' },
-    ],
-    benefits: ['Montée en compétences rapide des équipes', 'Productivité améliorée au quotidien', 'Autonomie renforcée sur les outils digitaux'],
-  },
-]
+export const siteMeta = {
+  brandName: '2A2C Tech',
+  brandMark: '2A2C//TECH',
+  tagline: 'Expert IT, logiciels sur mesure et infrastructure digitale',
+  location: 'Dakar, Senegal',
+  consultationDelay: 'Reponse en moins de 24 heures',
+}
 
-// ── Portfolio ──────────────────────────────────────
-export const portfolio = [
-  {
-    id: 'saas-rh',
-    titre: 'Plateforme SaaS RH',
-    description: 'Gestion des candidatures et automatisation des processus RH pour une grande entreprise.',
-    tags: ['React', 'Spring Boot', 'PostgreSQL'],
-    gradient: 'from-primary to-violet',
-  },
-  {
-    id: 'delivery-app',
-    titre: 'Application de livraison',
-    description: 'Suivi des commandes, notifications push et géolocalisation en temps réel.',
-    tags: ['React Native', 'Node.js', 'MongoDB'],
-    gradient: 'from-violet to-accent',
-  },
-  {
-    id: 'ecommerce-premium',
-    titre: 'Boutique e-commerce',
-    description: 'Parcours d\'achat optimisé et intégration paiement mobile sécurisée.',
-    tags: ['Next.js', 'Stripe', 'Tailwind'],
-    gradient: 'from-accent to-primary',
-  },
-  {
-    id: 'school-management',
-    titre: 'Gestion scolaire',
-    description: 'Plateforme complète de gestion des notes, présences et communications parents-école.',
-    tags: ['Angular', 'Spring Boot', 'MySQL'],
-    gradient: 'from-primary-600 to-primary',
-  },
-]
-
-// ── Témoignages ───────────────────────────────────
-export const temoignages = [
-  {
-    id: 'temoignage-1',
-    auteur: 'Marie K.',
-    role: 'Directrice commerciale',
-    entreprise: 'TechVision SA',
-    texte: 'Équipe réactive, solutions claires et résultats visibles rapidement. Notre productivité a augmenté de 40% grâce à leur plateforme.',
-    rating: 5,
-    avatarGradient: 'from-pink-500 to-rose-400',
-  },
-  {
-    id: 'temoignage-2',
-    auteur: 'Patrick M.',
-    role: 'Fondateur',
-    entreprise: 'DeliverNow',
-    texte: 'Le site et notre application mobile ont été livrés avec une très bonne qualité et un suivi exemplaire. Je recommande vivement.',
-    rating: 5,
-    avatarGradient: 'from-primary to-violet',
-  },
-  {
-    id: 'temoignage-3',
-    auteur: 'Sophie L.',
-    role: 'Responsable communication',
-    entreprise: 'MediaPlus Agency',
-    texte: 'Le branding et la stratégie digitale ont boosté notre visibilité et nos demandes entrantes de plus de 60%.',
-    rating: 5,
-    avatarGradient: 'from-emerald-500 to-teal-400',
-  },
-]
-
-// ── Statistiques ──────────────────────────────────
-export const stats = [
-  { id: 'projects', value: 50, suffix: '+', label: 'Projets réalisés' },
-  { id: 'clients', value: 35, suffix: '+', label: 'Clients satisfaits' },
-  { id: 'experience', value: 4, suffix: ' ans', label: 'D\'expérience' },
-  { id: 'satisfaction', value: 98, suffix: '%', label: 'Taux de satisfaction' },
-]
-
-// ── Navigation ────────────────────────────────────
 export const navigation = [
   { id: 'accueil', label: 'Accueil', href: '#accueil' },
-  { id: 'a-propos', label: 'À propos', href: '#a-propos' },
-  { id: 'equipe', label: 'Équipe', href: '#equipe' },
   { id: 'services', label: 'Services', href: '#services' },
+  { id: 'a-propos', label: 'Expertise', href: '#a-propos' },
   { id: 'portfolio', label: 'Portfolio', href: '#portfolio' },
-  { id: 'temoignages', label: 'Témoignages', href: '#temoignages' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ]
 
-// ── Contact info ──────────────────────────────────
+export const heroStats = [
+  { value: '30+', label: 'missions livrees', detail: 'logiciels, reseaux, maintenance et design' },
+  { value: '98%', label: 'satisfaction client', detail: 'partenariats suivis sur la duree' },
+  { value: '5', label: 'expertises connectees', detail: 'un interlocuteur pour tout votre systeme digital' },
+]
+
+export const services = [
+  {
+    id: 'custom-software',
+    icon: Code2,
+    accent: 'from-sky-400 via-blue-300 to-blue-600',
+    label: 'Custom software development',
+    title: 'Developpement logiciel sur mesure',
+    description: 'Innovate with tailored solutions.',
+    longDescription:
+      'Nous concevons des applications metier, portails clients, SaaS et tableaux de bord qui collent a vos vrais flux de travail. Chaque produit est pense pour automatiser, fiabiliser et accelerer vos operations.',
+    features: [
+      'Applications metier, CRM, ERP legers et portails B2B/B2C',
+      'Architecture evolutive avec API, authentification et tableaux de bord',
+      'UX claire, performance web et maintenance continue',
+    ],
+    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Supabase'],
+    processSteps: [
+      { step: 'Cadrage', desc: 'Audit des besoins, priorisation et definition des objectifs mesurables.' },
+      { step: 'Prototype', desc: 'Wireframes et parcours utilisateur valides avant la phase de build.' },
+      { step: 'Delivery', desc: 'Developpement par iterations avec revues, tests et documentation.' },
+      { step: 'Run', desc: 'Mises a jour, optimisation et support apres mise en ligne.' },
+    ],
+    benefits: ['Automatisation concrete', 'Architecture durable', 'Pilotage clair des operations'],
+    highlight: 'Produits concus pour vos process reels, pas pour une demo.',
+  },
+  {
+    id: 'it-training',
+    icon: GraduationCap,
+    accent: 'from-indigo-300 via-sky-300 to-blue-500',
+    label: 'IT training',
+    title: 'Formation IT',
+    description: 'Empower your team with cutting-edge knowledge.',
+    longDescription:
+      'Nous construisons des parcours de formation pratiques pour les equipes, les dirigeants et les operateurs terrain. L objectif est simple : transformer les outils numeriques en gains de competence visibles et durables.',
+    features: [
+      'Formations bureautique, collaboration cloud, cyber hygiene et productivite',
+      'Ateliers dev, reseau ou exploitation adaptes au niveau des participants',
+      'Supports, exercices, evaluation et transfert de bonnes pratiques',
+    ],
+    technologies: ['Microsoft 365', 'Google Workspace', 'Cisco', 'Linux', 'Notion', 'Figma'],
+    processSteps: [
+      { step: 'Evaluation', desc: 'Identification du niveau de depart et des cas d usage prioritaires.' },
+      { step: 'Programme', desc: 'Creation du contenu, des exercices et des objectifs par session.' },
+      { step: 'Animation', desc: 'Sessions dynamiques en presentiel ou a distance avec cas pratiques.' },
+      { step: 'Ancrage', desc: 'Suivi, recap et feuille de route pour consolider les acquis.' },
+    ],
+    benefits: ['Montee en competence rapide', 'Adoption des outils', 'Equipes plus autonomes'],
+    highlight: 'Des formations utiles des le lendemain, pas seulement theoriques.',
+  },
+  {
+    id: 'network-telecom',
+    icon: Network,
+    accent: 'from-teal-300 via-cyan-300 to-sky-500',
+    label: 'Network and telecom',
+    title: 'Reseaux & telecom',
+    description: 'Reliable, secure, and high-performance infrastructure.',
+    longDescription:
+      'Nous dimensionnons et securisons votre infrastructure reseau pour garantir connectivite, disponibilite et qualite de service. De la topologie LAN/WAN a la supervision, nous pensons la technique comme un levier business.',
+    features: [
+      'Conception, segmentation et optimisation LAN, Wi-Fi et interconnexions multi-sites',
+      'Telephonie IP, lien telecom et continuite de service',
+      'Monitoring, securisation des acces et documentation d exploitation',
+    ],
+    technologies: ['MikroTik', 'Cisco', 'pfSense', 'Ubiquiti', 'VoIP', 'Zabbix'],
+    processSteps: [
+      { step: 'Audit terrain', desc: 'Analyse de l existant, des goulots d etranglement et des risques.' },
+      { step: 'Architecture', desc: 'Schema cible, adressage, securite et plan de migration.' },
+      { step: 'Deploiement', desc: 'Installation, tests, bascule et verification de performance.' },
+      { step: 'Supervision', desc: 'Suivi, alerting et maintenance preventive.' },
+    ],
+    benefits: ['Disponibilite accrue', 'Reseau mieux securise', 'Operations plus fluides'],
+    highlight: 'Une infrastructure qui soutient votre croissance au lieu de la freiner.',
+  },
+  {
+    id: 'maintenance',
+    icon: Wrench,
+    accent: 'from-amber-300 via-orange-300 to-orange-500',
+    label: 'IT maintenance',
+    title: 'Maintenance informatique',
+    description: 'Ensure seamless operation and peak performance.',
+    longDescription:
+      'Nous prenons en charge le support, la maintenance preventive et la remise en etat de vos postes, serveurs et equipements critiques. Notre approche privilegie la stabilite, la rapidite d intervention et la prevention des incidents.',
+    features: [
+      'Support utilisateurs, diagnostic materiel et logiciel, interventions sur site ou a distance',
+      'Maintenance preventive, mises a jour et optimisation des postes et serveurs',
+      'Sauvegarde, reprise, hygiene de securite et suivi de parc',
+    ],
+    technologies: ['Windows', 'Linux', 'GLPI', 'AnyDesk', 'VMware', 'Backup tooling'],
+    processSteps: [
+      { step: 'Signalement', desc: 'Prise en charge structuree de la demande et qualification rapide.' },
+      { step: 'Diagnostic', desc: 'Isolation de la panne et proposition de solution adaptee.' },
+      { step: 'Resolution', desc: 'Intervention corrective avec verification du retour a la normale.' },
+      { step: 'Prevention', desc: 'Rapport, recommandations et plan d amelioration continue.' },
+    ],
+    benefits: ['Moins d arrets', 'Parc plus fiable', 'Support rassurant pour vos equipes'],
+    highlight: 'Le bon support au bon moment, avec une logique preventive.',
+  },
+  {
+    id: 'graphics-design',
+    icon: Palette,
+    accent: 'from-pink-300 via-fuchsia-300 to-violet-500',
+    label: 'Computer graphics and design',
+    title: 'Infographie & design',
+    description: 'Stunning visuals that captivate and convert.',
+    longDescription:
+      'Nous donnons une forme visuelle forte a vos produits, supports commerciaux et identites de marque. Le design est pense comme un accelerateur de credibilite, de memorisation et de conversion.',
+    features: [
+      'Identites visuelles, chartes, templates social media et kits commerciaux',
+      'Supports print et digitaux : affiches, flyers, banniers et presentations',
+      'UI design, mockups et visuels de lancement pour produits technologiques',
+    ],
+    technologies: ['Figma', 'Adobe Photoshop', 'Illustrator', 'Canva Pro', 'After Effects'],
+    processSteps: [
+      { step: 'Brief', desc: 'Clarification du positionnement, des messages et de l audience visee.' },
+      { step: 'Direction', desc: 'Moodboard, style visuel et systeme graphique coherents.' },
+      { step: 'Production', desc: 'Creation des assets, ajustements et declinaisons multi-supports.' },
+      { step: 'Livraison', desc: 'Fichiers finalises, guidelines et formats prets a l emploi.' },
+    ],
+    benefits: ['Image plus premium', 'Communication plus claire', 'Supports plus memorables'],
+    highlight: 'Un design qui sert votre business, pas seulement votre galerie.',
+  },
+]
+
+export const aboutContent = {
+  whoWeAre:
+    '2A2C Tech accompagne les entreprises, PME, organisations et porteurs de projet qui veulent une execution technique serieuse, lisible et elegante. Nous combinons conseil, build et support pour faire avancer des projets concrets.',
+  mission:
+    'Notre mission est de transformer des besoins techniques parfois fragmentes en systemes digitaux fiables, coherents et performants : logiciels utiles, equipes mieux formees, reseaux robustes, maintenance rassurante et image visuelle nette.',
+  approach:
+    'Nous privilegions une collaboration directe, des recommandations sans jargon inutile, et des livrables qui restent exploitables dans le temps.',
+}
+
+export const aboutPillars = [
+  {
+    icon: BriefcaseBusiness,
+    title: 'Vision orientee resultat',
+    description: 'Chaque choix technique doit soutenir un gain metier mesurable.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Fiabilite et securite',
+    description: 'Nous cherchons la stabilite, la clarte et la reduction du risque operationnel.',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'Collaboration transparente',
+    description: 'Vous gardez de la visibilite sur les priorites, les delais et les arbitrages.',
+  },
+]
+
+export const approachSteps = [
+  {
+    id: '01',
+    icon: Workflow,
+    title: 'Diagnostiquer avant de produire',
+    description: 'Nous clarifions d abord l objectif, le parcours utilisateur et les contraintes terrain.',
+  },
+  {
+    id: '02',
+    icon: Cpu,
+    title: 'Concevoir des systemes durables',
+    description: 'Nous structurons la solution pour qu elle reste lisible, maintenable et evolutive.',
+  },
+  {
+    id: '03',
+    icon: MonitorCog,
+    title: 'Livrer, former, transferer',
+    description: 'Nous allons jusqu a la mise en service, la prise en main et le support post-lancement.',
+  },
+  {
+    id: '04',
+    icon: Sparkles,
+    title: 'Polir l experience',
+    description: 'Nous ajoutons la couche visuelle, la fluidite et les details qui rendent le rendu premium.',
+  },
+]
+
+export const approachChecklist = [
+  'Cadrage sur les vrais enjeux, pas sur des fonctionnalites accessoires',
+  'Design et execution aligns avec une image premium et professionnelle',
+  'Support clair, documentation simple et transfert de competence',
+]
+
+export const caseStudies = [
+  {
+    id: 'ops-suite',
+    icon: Layers3,
+    accent: 'from-sky-400 via-blue-300 to-indigo-500',
+    logo: 'OPS',
+    category: 'Custom software',
+    title: 'Suite de gestion pour une societe de services',
+    summary:
+      'Centralisation des demandes clients, du suivi d interventions et des reportings direction.',
+    challenge:
+      'Les equipes jonglaient entre WhatsApp, Excel et appels telephoniques, avec une perte de tracabilite sur les operations.',
+    solution:
+      'Nous avons construit un portail metier avec tableaux de bord, demandes structurees, suivi de tickets et exports automatiques.',
+    results: [
+      'Reduction du temps de traitement des demandes internes',
+      'Meilleure visibilite sur les priorites et les incidents ouverts',
+      'Reporting de direction disponible sans ressaisie',
+    ],
+    metrics: [
+      { value: '-42%', label: 'temps de traitement' },
+      { value: '+3x', label: 'visibilite operationnelle' },
+      { value: '8 sem.', label: 'mise en production' },
+    ],
+    stack: ['React', 'Supabase', 'Tailwind', 'Role-based access'],
+    deliverables: ['Portail clients', 'Tableau de bord operations', 'Exports reporting'],
+  },
+  {
+    id: 'academy-lab',
+    icon: GraduationCap,
+    accent: 'from-indigo-300 via-sky-300 to-cyan-400',
+    logo: 'LAB',
+    category: 'IT training',
+    title: 'Programme de formation numerique pour PME',
+    summary:
+      'Montage d un parcours sur 6 semaines pour faire progresser des equipes administratives et commerciales.',
+    challenge:
+      'Les outils bureautiques, collaboratifs et de suivi n etaient pas maitrises de maniere homogene au sein des equipes.',
+    solution:
+      'Nous avons deploye un programme mixant ateliers, fiches pratiques et exercices lies au quotidien de l entreprise.',
+    results: [
+      'Adoption plus rapide des nouveaux outils',
+      'Moins de support interne sur les usages courants',
+      'Standardisation des methodes de travail',
+    ],
+    metrics: [
+      { value: '24', label: 'collaborateurs formes' },
+      { value: '6', label: 'semaines de parcours' },
+      { value: '92%', label: 'taux d adoption' },
+    ],
+    stack: ['Google Workspace', 'Microsoft 365', 'Guides internes', 'Ateliers pratiques'],
+    deliverables: ['Parcours de formation', 'Supports PDF', 'Plan d adoption'],
+  },
+  {
+    id: 'network-core',
+    icon: Antenna,
+    accent: 'from-teal-300 via-cyan-300 to-sky-500',
+    logo: 'NET',
+    category: 'Network & telecom',
+    title: 'Refonte reseau et telecom pour une structure multisite',
+    summary:
+      'Amelioration de la couverture reseau, de la segmentation et de la qualite de service entre plusieurs points.',
+    challenge:
+      'La qualite de connexion et la telephonie IP souffraient de coupures, de latence et d un manque de supervision.',
+    solution:
+      'Nous avons redessine la topologie, separe les usages critiques et installe une supervision continue avec plan de maintenance.',
+    results: [
+      'Connexion plus stable pour les operations sensibles',
+      'Baisse des interruptions et meilleure qualite d appel',
+      'Documentation reseau utile pour les futures interventions',
+    ],
+    metrics: [
+      { value: '99.5%', label: 'disponibilite visee' },
+      { value: '-60%', label: 'incidents majeurs' },
+      { value: '3', label: 'sites harmonises' },
+    ],
+    stack: ['MikroTik', 'Ubiquiti', 'VoIP', 'Firewalling', 'Monitoring'],
+    deliverables: ['Schema reseau', 'Segmentation', 'Supervision & alertes'],
+  },
+  {
+    id: 'brand-studio',
+    icon: Palette,
+    accent: 'from-pink-300 via-fuchsia-300 to-violet-500',
+    logo: 'VIS',
+    category: 'Graphics & design',
+    title: 'Kit visuel premium pour un cabinet de conseil',
+    summary:
+      'Creation d une identite plus haut de gamme pour les propositions commerciales et la presence digitale.',
+    challenge:
+      'La marque manquait de coherence visuelle, ce qui diluait la perception de valeur des prestations.',
+    solution:
+      'Nous avons construit un systeme visuel complet, des templates de presentation et une direction graphique plus assumee.',
+    results: [
+      'Image percue plus premium lors des prises de contact',
+      'Supports coherents entre vente, social media et documentation',
+      'Meilleure memorisation de la marque',
+    ],
+    metrics: [
+      { value: '1', label: 'systeme visuel unifie' },
+      { value: '14', label: 'assets livres' },
+      { value: '72h', label: 'pour le kit initial' },
+    ],
+    stack: ['Figma', 'Photoshop', 'Illustrator', 'Presentation templates'],
+    deliverables: ['Identite visuelle', 'Templates de slides', 'Kit social media'],
+  },
+]
+
+export const testimonials = [
+  {
+    id: 'test-1',
+    companyMark: 'NX',
+    company: 'Nexa Logistics',
+    author: 'Aminata S.',
+    role: 'Directrice des operations',
+    quote:
+      'Nous avions besoin d un partenaire capable de comprendre la technique et le terrain. Le rendu final est plus clair, plus robuste et surtout plus utile pour nos equipes.',
+    highlight: 'Produit deploye en 8 semaines',
+  },
+  {
+    id: 'test-2',
+    companyMark: 'OR',
+    company: 'Orizon Conseil',
+    author: 'Mamadou L.',
+    role: 'Fondateur',
+    quote:
+      'Le positionnement visuel et la qualite d execution ont change la perception de notre marque. Nous avons enfin une presence coherente avec notre niveau d expertise.',
+    highlight: 'Rebranding + supports de vente',
+  },
+  {
+    id: 'test-3',
+    companyMark: 'CL',
+    company: 'Clinique Lumiere',
+    author: 'Ndeye F.',
+    role: 'Responsable IT',
+    quote:
+      'La refonte reseau a reduit les interruptions critiques et nous avons maintenant une documentation exploitable. Le support est reactif et rassurant.',
+    highlight: 'Infrastructure multisite stabilisee',
+  },
+  {
+    id: 'test-4',
+    companyMark: 'AT',
+    company: 'Atelier 360',
+    author: 'Cheikh D.',
+    role: 'Chef de projet',
+    quote:
+      'Les formations etaient pratiques, bien rythmees et directement applicables. Les equipes ont gagne en autonomie tres vite.',
+    highlight: 'Parcours de formation sur mesure',
+  },
+]
+
+export const ctaContent = {
+  title: 'Ready to Transform Your Business?',
+  text:
+    'Contact us today for a personalized consultation, a clear roadmap and a custom quote aligned with your priorities.',
+}
+
 export const contactInfo = {
   email: 'contact@2a2ctech.com',
-  whatsapp: '+221 77 3394513',
+  phone: '+221 77 339 45 13',
+  whatsapp: '+221 77 339 45 13',
   whatsappLink: 'https://wa.me/221773394513',
-  adresse: 'Dakar, Sénégal',
-  mapsQuery: 'Dakar Sénégal',
+  address: 'Dakar, Senegal',
+  mapsQuery: 'Dakar Senegal',
+  socials: [
+    { label: 'LinkedIn', href: '#' },
+    { label: 'GitHub', href: '#' },
+  ],
 }

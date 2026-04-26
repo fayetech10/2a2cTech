@@ -1,20 +1,19 @@
-/**
- * Consistent section header with badge, gradient title, and subtitle.
- * Reused across all major sections.
- */
-function SectionHeader({ badge, title, subtitle, centered = true }) {
+function SectionHeader({ badge, title, subtitle, centered = true, className = '' }) {
   return (
-    <div className={`mb-14 max-w-3xl ${centered ? 'mx-auto text-center' : ''}`}>
+    <div className={`${centered ? 'mx-auto max-w-4xl text-center' : 'max-w-3xl'} ${className}`}>
       {badge && (
-        <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-300">
+        <span className="section-eyebrow mb-5">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           {badge}
         </span>
       )}
-      <h2 className="mb-4 text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
+      <h2 className="text-4xl font-semibold leading-[1.02] text-dark-900 sm:text-5xl lg:text-6xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-base text-slate-400 sm:text-lg">{subtitle}</p>
+        <p className={`mt-5 text-base leading-8 text-muted sm:text-xl ${centered ? 'mx-auto max-w-2xl' : ''}`}>
+          {subtitle}
+        </p>
       )}
     </div>
   )

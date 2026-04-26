@@ -1,175 +1,160 @@
 import { useEffect } from 'react'
-import { X, CheckCircle2, ArrowRight, Cpu, Sparkles } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Cpu, Sparkles, X } from 'lucide-react'
+import { motion } from 'framer-motion'
 import Button from '../ui/Button'
 
-/**
- * Full-screen modal overlay that displays detailed service information.
- * Triggered when clicking a service card in ServicesSection.
- */
+const MotionDiv = motion.div
+
 function ServiceDetail({ service, onClose }) {
   const Icon = service.icon
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     document.body.style.overflow = 'hidden'
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
     return () => {
       document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
-
-  // Close on Escape key
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
   }, [onClose])
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-dark-900/90 backdrop-blur-md"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose()
+      className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto bg-black/[0.22] px-4 py-10 backdrop-blur-xl"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose()
       }}
-      id="service-detail-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={`service-title-${service.id}`}
     >
-      <div className="relative mx-4 my-8 w-full max-w-4xl animate-fade-in-up sm:mx-6 md:my-16">
-        {/* Close button */}
+      <MotionDiv
+        className="glass-panel-strong relative w-full max-w-5xl overflow-hidden"
+        initial={{ opacity: 0, y: 18, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
         <button
+          type="button"
           onClick={onClose}
-          className="absolute -top-2 right-0 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-dark-800 text-slate-400 transition-all hover:border-white/30 hover:text-white sm:-right-2"
-          aria-label="Fermer"
-          id="service-detail-close"
+          className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-black/[0.06] bg-white text-slate-600 transition-colors hover:text-dark-900"
+          aria-label="Fermer le detail du service"
         >
           <X className="h-5 w-5" />
         </button>
 
-        {/* Main card */}
-        <div className="overflow-hidden rounded-3xl border border-white/10 bg-dark-800 shadow-2xl">
-          {/* Header with gradient */}
-          <div className="relative overflow-hidden bg-gradient-to-r from-primary/20 via-violet/20 to-accent/10 px-6 py-10 sm:px-10 sm:py-12">
-            {/* Background pattern */}
-            <div className="pointer-events-none absolute inset-0 opacity-10">
-              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary blur-3xl" />
-              <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-violet blur-3xl" />
+        <div className="p-6 sm:p-8 lg:p-10">
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_.95fr]">
+            <div>
+              <span className="section-eyebrow">
+                <span className={`flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ${service.accent}`}>
+                  <Icon className="h-3.5 w-3.5 text-white" />
+                </span>
+                {service.label}
+              </span>
+
+              <h3
+                id={`service-title-${service.id}`}
+                className="mt-5 text-3xl font-semibold text-dark-900 sm:text-4xl"
+              >
+                {service.title}
+              </h3>
+
+              <p className="mt-4 text-base leading-8 text-muted">{service.longDescription}</p>
+
+              <div className="mt-8 rounded-[1.75rem] bg-[#f5f5f7] p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                <p className="text-sm font-medium uppercase tracking-[0.18em] text-slate-500">
+                  Ce que nous apportons
+                </p>
+                <p className="mt-3 text-lg font-medium text-dark-900">{service.highlight}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {service.benefits.map((benefit) => (
+                    <span
+                      key={benefit}
+                      className="rounded-full border border-black/[0.06] bg-white px-3 py-1.5 text-sm text-slate-700"
+                    >
+                      {benefit}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <div className="relative flex items-start gap-5">
-              <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${service.gradient} shadow-lg`}>
-                <Icon className="h-8 w-8 text-white" />
+            <div className="space-y-5">
+              <div className="rounded-[1.75rem] bg-[#f5f5f7] p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                <h4 className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-slate-600">
+                  <CheckCircle2 className="h-4 w-4 text-primary" />
+                  Perimetre
+                </h4>
+                <ul className="mt-4 space-y-3">
+                  {service.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3 text-sm leading-7 text-slate-700">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div>
-                <h2 className="mb-2 text-2xl font-extrabold text-white sm:text-3xl">
-                  {service.titre}
-                </h2>
-                <p className="text-sm leading-relaxed text-slate-300 sm:text-base">
-                  {service.longDescription}
-                </p>
+
+              <div className="rounded-[1.75rem] bg-[#f5f5f7] p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                <h4 className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-slate-600">
+                  <Cpu className="h-4 w-4 text-primary" />
+                  Stack & outils
+                </h4>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {service.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-black/[0.06] bg-white px-3 py-1.5 text-sm text-slate-700"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Content */}
-          <div className="space-y-8 px-6 py-8 sm:px-10 sm:py-10">
-            {/* Features */}
-            <div>
-              <h3 className="mb-5 flex items-center gap-2 text-lg font-bold text-white">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                Ce que nous proposons
-              </h3>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {service.features.map((feature, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.05]"
-                  >
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                      {i + 1}
+          <div className="mt-8 rounded-[2rem] bg-[#f5f5f7] p-6 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+            <h4 className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-slate-600">
+              <Sparkles className="h-4 w-4 text-primary" />
+              Notre approche de delivery
+            </h4>
+
+            <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {service.processSteps.map((step, index) => (
+                <div key={step.step} className="rounded-[1.45rem] bg-white p-4 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white">
+                      {index + 1}
                     </span>
-                    <span className="text-sm leading-relaxed text-slate-300">{feature}</span>
+                    <p className="font-medium text-dark-900">{step.step}</p>
                   </div>
-                ))}
-              </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{step.desc}</p>
+                </div>
+              ))}
             </div>
+          </div>
 
-            {/* Process */}
+          <div className="mt-8 flex flex-col gap-4 rounded-[2rem] bg-dark-950 px-6 py-6 text-white md:flex-row md:items-center md:justify-between">
             <div>
-              <h3 className="mb-5 flex items-center gap-2 text-lg font-bold text-white">
-                <ArrowRight className="h-5 w-5 text-violet" />
-                Notre processus
-              </h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {service.processSteps.map((step, i) => (
-                  <div key={i} className="relative">
-                    {/* Connector line */}
-                    {i < service.processSteps.length - 1 && (
-                      <div className="absolute right-0 top-8 hidden h-0.5 w-4 bg-gradient-to-r from-primary/30 to-transparent lg:block" style={{ right: '-16px' }} />
-                    )}
-                    <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                      <div className="mb-3 flex items-center gap-3">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-violet text-sm font-bold text-white">
-                          {i + 1}
-                        </span>
-                        <span className="font-semibold text-white">{step.step}</span>
-                      </div>
-                      <p className="text-sm text-slate-400">{step.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="text-2xl font-semibold">Parlons de votre besoin</p>
+              <p className="mt-2 text-sm leading-7 text-white/[0.72]">
+                Nous pouvons transformer ce service en feuille de route claire, chiffrage et prochaine etape concrete.
+              </p>
             </div>
-
-            {/* Technologies */}
-            <div>
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-white">
-                <Cpu className="h-5 w-5 text-accent" />
-                Technologies utilisées
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {service.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-slate-300 transition-colors hover:border-primary/30 hover:text-primary"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Benefits */}
-            <div>
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-white">
-                <Sparkles className="h-5 w-5 text-yellow-400" />
-                Vos avantages
-              </h3>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {service.benefits.map((benefit, i) => (
-                  <div
-                    key={i}
-                    className="rounded-xl border border-white/5 bg-gradient-to-br from-primary/5 to-violet/5 p-4 text-center"
-                  >
-                    <p className="text-sm font-medium text-slate-200">{benefit}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="flex flex-col items-center gap-4 rounded-2xl border border-white/5 bg-gradient-to-r from-primary/5 via-violet/5 to-accent/5 p-6 text-center sm:flex-row sm:justify-between sm:text-left">
-              <div>
-                <p className="font-bold text-white">Intéressé par ce service ?</p>
-                <p className="text-sm text-slate-400">Contactez-nous pour un devis gratuit et personnalisé.</p>
-              </div>
-              <Button href="#contact" size="lg" onClick={onClose}>
-                Demander un devis
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </div>
+            <Button href="#contact" onClick={onClose}>
+              Demarrer la discussion
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Button>
           </div>
         </div>
-      </div>
+      </MotionDiv>
     </div>
   )
 }

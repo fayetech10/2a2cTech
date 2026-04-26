@@ -1,78 +1,102 @@
-import { Layers, Smartphone, ShoppingCart, BookOpen } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowUpRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { caseStudies } from '../../data/siteData'
 import SectionHeader from '../ui/SectionHeader'
-import { portfolio } from '../../data/siteData'
-import { useScrollReveal } from '../../hooks/useScrollReveal'
+import CaseStudyDetail from './CaseStudyDetail'
 
-const portfolioIcons = {
-  'saas-rh': Layers,
-  'delivery-app': Smartphone,
-  'ecommerce-premium': ShoppingCart,
-  'school-management': BookOpen,
-}
+const MotionArticle = motion.article
 
 function PortfolioSection() {
-  const containerRef = useScrollReveal({ staggerDelay: 150 })
+  const [selectedCase, setSelectedCase] = useState(null)
 
   return (
-    <section id="portfolio" className="section-padding relative" ref={containerRef}>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800/50 to-dark-900" />
+    <>
+      <section id="portfolio" className="relative section-padding">
+        <div className="shell">
+          <SectionHeader
+            badge="Portfolio"
+            title={
+              <>
+                Des case studies plus nettes.
+                <span className="block text-slate-400">Comme des pages produit.</span>
+              </>
+            }
+            subtitle="Chaque projet est presente avec un impact principal, quelques chiffres cles et une lecture rapide du probleme, de la solution et des resultats."
+          />
 
-      <div className="relative mx-auto max-w-7xl">
-        <SectionHeader
-          badge="Portfolio"
-          title={
-            <>
-              Nos{' '}
-              <span className="gradient-text">réalisations</span>
-            </>
-          }
-          subtitle="Projets conçus et livrés pour nos clients."
-        />
+          <div className="mt-14 grid gap-5 xl:grid-cols-2">
+            {caseStudies.map((item, index) => {
+              const Icon = item.icon
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {portfolio.map((projet, index) => {
-            const Icon = portfolioIcons[projet.id] || Layers
-            return (
-              <div key={projet.id} className="reveal" data-delay={index * 150}>
-                <article className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-500 hover:border-white/20 hover:bg-white/[0.06]">
-                  {/* Gradient header */}
-                  <div className={`relative h-44 overflow-hidden bg-gradient-to-br ${projet.gradient}`}>
-                    {/* Centered icon */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative">
-                        <div className="h-24 w-24 rounded-2xl border border-white/15 transition-transform duration-700 group-hover:rotate-6 group-hover:scale-110" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Icon className="h-10 w-10 text-white/70 transition-all duration-500 group-hover:scale-110 group-hover:text-white" />
+              return (
+                <MotionArticle
+                  key={item.id}
+                  className="glass-panel overflow-hidden p-0"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.18 }}
+                  transition={{ delay: index * 0.08, duration: 0.55, ease: 'easeOut' }}
+                >
+                  <div className={`relative overflow-hidden bg-gradient-to-br ${item.accent} p-6 sm:p-8`}>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.32),_transparent_36%)]" />
+                    <div className="relative rounded-[2rem] border border-white/35 bg-white/20 p-5 backdrop-blur-sm">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <p className="text-sm font-medium uppercase tracking-[0.18em] text-white/[0.78]">{item.category}</p>
+                          <h3 className="mt-3 text-3xl font-semibold leading-tight text-white">{item.title}</h3>
+                        </div>
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/30 bg-white/20 text-white">
+                          <Icon className="h-5 w-5" />
                         </div>
                       </div>
+
+                      <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                        {item.metrics.map((metric) => (
+                          <div key={metric.label} className="rounded-[1.35rem] border border-white/25 bg-white/18 p-4">
+                            <p className="text-3xl font-semibold text-white">{metric.value}</p>
+                            <p className="mt-2 text-sm text-white/[0.82]">{metric.label}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    {/* Fade overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent" />
-                    {/* Number */}
-                    <span className="absolute right-4 top-4 rounded-lg bg-white/10 px-2.5 py-1 text-xs font-bold text-white/70 backdrop-blur-sm">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-5">
-                    <h3 className="mb-1.5 text-base font-bold text-white">{projet.titre}</h3>
-                    <p className="mb-4 text-sm text-slate-400">{projet.description}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {projet.tags.map((tag) => (
-                        <span key={tag} className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-400">
-                          {tag}
+                  <div className="p-6 sm:p-8">
+                    <p className="text-base font-medium text-primary">{item.summary}</p>
+                    <p className="mt-4 text-sm leading-7 text-muted">{item.challenge}</p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {item.deliverables.map((deliverable) => (
+                        <span
+                          key={deliverable}
+                          className="rounded-full border border-black/[0.06] bg-[#f5f5f7] px-3 py-1.5 text-sm text-slate-700"
+                        >
+                          {deliverable}
                         </span>
                       ))}
                     </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCase(item)}
+                      className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary-700"
+                    >
+                      Ouvrir la case study
+                      <ArrowUpRight className="h-4 w-4" />
+                    </button>
                   </div>
-                </article>
-              </div>
-            )
-          })}
+                </MotionArticle>
+              )
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {selectedCase && (
+        <CaseStudyDetail item={selectedCase} onClose={() => setSelectedCase(null)} />
+      )}
+    </>
   )
 }
 

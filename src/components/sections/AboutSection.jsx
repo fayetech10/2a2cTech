@@ -1,106 +1,88 @@
-import { Target, Settings, Users, Lightbulb, Lock, Phone, Globe2, ArrowRight } from 'lucide-react'
-import SectionHeader from '../ui/SectionHeader'
+import { ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { aboutContent, aboutPillars, heroStats } from '../../data/siteData'
 import Button from '../ui/Button'
-import { useScrollReveal } from '../../hooks/useScrollReveal'
+import SectionHeader from '../ui/SectionHeader'
 
-const expertises = [
-  {
-    icon: Target,
-    title: 'Expertise métier',
-    description: 'Chaque solution est alignée sur vos objectifs business pour un impact réel et mesurable.',
-    gradient: 'from-primary to-blue-400',
-  },
-  {
-    icon: Settings,
-    title: 'Qualité technique',
-    description: 'Technologies modernes, code propre et architecture évolutive pour des solutions durables.',
-    gradient: 'from-violet to-purple-400',
-  },
-  {
-    icon: Users,
-    title: 'Accompagnement',
-    description: 'De l\'idée au déploiement, nous restons disponibles, réactifs et engagés.',
-    gradient: 'from-accent to-cyan-400',
-  },
-]
-
-const values = [
-  { icon: Lightbulb, label: 'Innovation', gradient: 'from-amber-500 to-orange-400' },
-  { icon: Lock, label: 'Sécurité', gradient: 'from-red-500 to-rose-400' },
-  { icon: Phone, label: 'Support 24/7', gradient: 'from-emerald-500 to-green-400' },
-  { icon: Globe2, label: 'Vision globale', gradient: 'from-primary to-violet' },
-]
+const MotionDiv = motion.div
 
 function AboutSection() {
-  const containerRef = useScrollReveal()
-
   return (
-    <section id="a-propos" className="section-padding relative" ref={containerRef}>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900" />
+    <section id="a-propos" className="relative section-padding">
+      <div className="shell">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <MotionDiv
+            className="glass-panel-strong p-7 sm:p-9"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.24 }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+          >
+            <SectionHeader
+              badge="Who We Are"
+              centered={false}
+              title={
+                <>
+                  Une approche
+                  <span className="block text-slate-400">plus calme, plus precise.</span>
+                </>
+              }
+              subtitle={aboutContent.whoWeAre}
+            />
 
-      <div className="relative mx-auto max-w-7xl">
-        <div className="grid items-start gap-16 lg:grid-cols-12">
-          {/* Left: Text */}
-          <div className="reveal lg:col-span-5" data-delay="0">
-            <span className="mb-4 inline-block rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-300">
-              À propos
-            </span>
-            <h2 className="mb-5 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-              Votre partenaire{' '}
-              <span className="gradient-text">digital de confiance</span>
-            </h2>
-            <p className="mb-8 leading-relaxed text-slate-400">
-              Nous accompagnons les entreprises dans leur transformation numérique
-              avec une approche orientée résultats. Notre mission : rendre la
-              technologie accessible pour générer de la valeur, quelle que soit
-              la taille de votre entreprise.
-            </p>
-
-            {/* Values grid */}
-            <div className="grid grid-cols-2 gap-3">
-              {values.map((item) => {
-                const Icon = item.icon
-                return (
-                  <div
-                    key={item.label}
-                    className="group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.06]"
-                  >
-                    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${item.gradient} transition-transform duration-300 group-hover:scale-110`}>
-                      <Icon className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-sm font-medium text-slate-300">{item.label}</span>
-                  </div>
-                )
-              })}
+            <div className="mt-8 space-y-5 text-base leading-8 text-muted">
+              <p>{aboutContent.mission}</p>
+              <p>{aboutContent.approach}</p>
             </div>
 
-            <Button href="#services" variant="outline" size="md" className="mt-8">
-              Découvrir nos services
-              <ArrowRight className="h-4 w-4" />
+            <Button href="#portfolio" variant="secondary" className="mt-8">
+              Voir les realisations
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </Button>
-          </div>
+          </MotionDiv>
 
-          {/* Right: Expertise cards */}
-          <div className="lg:col-span-7">
-            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-              {expertises.map((item, index) => {
-                const Icon = item.icon
-                return (
-                  <div key={item.title} className="reveal" data-delay={index * 150}>
-                    <div className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] sm:flex-col lg:flex-row lg:items-start">
-                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} shadow-lg transition-transform duration-300 group-hover:scale-110`}>
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="mb-2 text-base font-bold text-white">{item.title}</h3>
-                        <p className="text-sm leading-relaxed text-slate-400">{item.description}</p>
-                      </div>
-                    </div>
+          <MotionDiv
+            className="grid gap-5"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.24 }}
+            transition={{ delay: 0.06, duration: 0.55, ease: 'easeOut' }}
+          >
+            <div className="glass-panel-strong overflow-hidden p-6 sm:p-8">
+              <div className="grid gap-4 sm:grid-cols-3">
+                {heroStats.map((stat) => (
+                  <div key={stat.label} className="rounded-[1.6rem] bg-[#f5f5f7] p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                    <p className="text-3xl font-semibold text-dark-900">{stat.value}</p>
+                    <p className="mt-2 text-sm font-medium text-slate-700">{stat.label}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-500">{stat.detail}</p>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-3">
+              {aboutPillars.map((pillar, index) => {
+                const Icon = pillar.icon
+
+                return (
+                  <MotionDiv
+                    key={pillar.title}
+                    className="glass-panel p-6"
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ delay: 0.08 + index * 0.08, duration: 0.5, ease: 'easeOut' }}
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#f5f5f7] text-primary shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <p className="mt-5 text-2xl font-semibold text-dark-900">{pillar.title}</p>
+                    <p className="mt-3 text-sm leading-7 text-muted">{pillar.description}</p>
+                  </MotionDiv>
                 )
               })}
             </div>
-          </div>
+          </MotionDiv>
         </div>
       </div>
     </section>

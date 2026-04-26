@@ -1,94 +1,144 @@
 import { useState } from 'react'
-import { Quote } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { testimonials } from '../../data/siteData'
 import SectionHeader from '../ui/SectionHeader'
-import { temoignages } from '../../data/siteData'
-import { useScrollReveal } from '../../hooks/useScrollReveal'
 
-function StarRating({ rating }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg
-          key={i}
-          className={`h-4 w-4 ${i < rating ? 'text-yellow-400' : 'text-white/10'}`}
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      ))}
-    </div>
-  )
-}
+const MotionBlockquote = motion.blockquote
 
 function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const containerRef = useScrollReveal()
+  const activeTestimonial = testimonials[activeIndex]
+
+  const handlePrevious = () => {
+    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))
+  }
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))
+  }
 
   return (
-    <section id="temoignages" className="section-padding relative" ref={containerRef}>
-      <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          badge="Témoignages"
-          title={
-            <>
-              Ce que disent{' '}
-              <span className="gradient-text">nos clients</span>
-            </>
-          }
-          subtitle="La satisfaction de nos clients est notre meilleure recommandation."
-        />
+    <section id="temoignages" className="relative section-padding">
+      <div className="shell">
+          <SectionHeader
+            badge="Testimonials"
+            title={
+              <>
+                Une preuve sociale plus sobre.
+                <span className="block text-slate-400">Plus proche d une presentation produit premium.</span>
+              </>
+            }
+            subtitle="Des retours clients plus lisibles, plus directs et plus faciles a parcourir pour comprendre rapidement l impact de nos interventions."
+          />
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {temoignages.map((item, index) => (
-            <div key={item.id} className="reveal" data-delay={index * 150}>
-              <blockquote
-                className={`group relative h-full cursor-pointer overflow-hidden rounded-2xl border p-6 transition-all duration-300 ${
-                  activeIndex === index
-                    ? 'border-primary/30 bg-white/10 shadow-lg shadow-primary/5'
-                    : 'border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]'
-                }`}
-                onClick={() => setActiveIndex(index)}
-              >
-                {/* Quote icon */}
-                <Quote className="mb-4 h-8 w-8 text-primary/30" />
-
-                <p className="mb-6 text-sm leading-relaxed text-slate-300">
-                  "{item.texte}"
-                </p>
-
-                <div className="mt-auto flex items-center gap-3">
-                  {/* Avatar with gradient */}
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br ${item.avatarGradient} text-sm font-bold text-white shadow-lg`}>
-                    {item.auteur.charAt(0)}
-                  </div>
-                  <div>
-                    <StarRating rating={item.rating} />
-                    <p className="mt-1 font-semibold text-white">{item.auteur}</p>
-                    <p className="text-xs text-slate-500">
-                      {item.role} — {item.entreprise}
-                    </p>
-                  </div>
+        <div className="mt-14 grid gap-5 lg:grid-cols-[1.08fr_.92fr]">
+          <div className="glass-panel-strong p-7 sm:p-9">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-dark-900 text-lg font-semibold text-white">
+                  {activeTestimonial.companyMark}
+                </span>
+                <div>
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-500">{activeTestimonial.company}</p>
+                  <p className="mt-2 text-sm text-slate-500">{activeTestimonial.highlight}</p>
                 </div>
-              </blockquote>
-            </div>
-          ))}
-        </div>
+              </div>
 
-        {/* Navigation dots */}
-        <div className="mt-8 flex justify-center gap-2 md:hidden">
-          {temoignages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`h-2 rounded-full transition-all ${
-                activeIndex === index
-                  ? 'w-6 bg-primary'
-                  : 'w-2 bg-white/20 hover:bg-white/40'
-              }`}
-              aria-label={`Témoignage ${index + 1}`}
-            />
-          ))}
+              <div className="hidden items-center gap-2 sm:flex">
+                <button
+                  type="button"
+                  onClick={handlePrevious}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-black/[0.06] bg-white text-slate-700 hover:text-dark-900"
+                  aria-label="Temoignage precedent"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-black/[0.06] bg-white text-slate-700 hover:text-dark-900"
+                  aria-label="Temoignage suivant"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <MotionBlockquote
+                key={activeTestimonial.id}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="mt-10"
+              >
+                <Quote className="h-10 w-10 text-primary/28" />
+                <p className="mt-6 max-w-3xl text-3xl font-semibold leading-[1.25] text-dark-900 sm:text-4xl">
+                  "{activeTestimonial.quote}"
+                </p>
+                <div className="mt-8">
+                  <p className="text-lg font-medium text-dark-900">{activeTestimonial.author}</p>
+                  <p className="mt-1 text-sm text-slate-500">
+                    {activeTestimonial.role} • {activeTestimonial.company}
+                  </p>
+                </div>
+              </MotionBlockquote>
+            </AnimatePresence>
+
+            <div className="mt-8 flex items-center justify-between sm:hidden">
+              <button
+                type="button"
+                onClick={handlePrevious}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-black/[0.06] bg-white text-slate-700 hover:text-dark-900"
+                aria-label="Temoignage precedent"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-black/[0.06] bg-white text-slate-700 hover:text-dark-900"
+                aria-label="Temoignage suivant"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            {testimonials.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={`glass-panel text-left p-5 transition-all ${
+                  activeIndex === index
+                    ? 'border-black/10 bg-white'
+                    : 'hover:border-black/[0.08] hover:bg-white'
+                }`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#f5f5f7] text-sm font-semibold text-dark-900">
+                        {item.companyMark}
+                      </span>
+                      <div>
+                        <p className="font-medium text-dark-900">{item.company}</p>
+                        <p className="text-sm text-slate-500">{item.author}</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-sm leading-7 text-muted">{item.quote}</p>
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

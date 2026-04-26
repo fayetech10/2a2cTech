@@ -1,47 +1,42 @@
-/**
- * Reusable Button component with gradient, outline, and ghost variants.
- *
- * @param {'primary' | 'outline' | 'ghost'} variant
- * @param {'sm' | 'md' | 'lg'} size
- */
 function Button({
   children,
   variant = 'primary',
   size = 'md',
   href,
   className = '',
+  disabled = false,
   ...props
 }) {
   const baseClasses =
-    'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 cursor-pointer'
+    'group inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 disabled:pointer-events-none disabled:opacity-55'
 
   const variants = {
     primary:
-      'bg-gradient-to-r from-primary to-violet text-white hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0',
-    outline:
-      'border border-white/20 text-white hover:bg-white/10 hover:border-white/40 backdrop-blur-sm',
+      'bg-primary text-white shadow-[0_18px_38px_-24px_rgba(0,113,227,0.7)] hover:-translate-y-0.5 hover:bg-primary-700',
+    secondary:
+      'border border-black/[0.08] bg-white text-dark-900 hover:-translate-y-0.5 hover:border-black/[0.12] hover:bg-[#fafafa]',
     ghost:
-      'text-slate-300 hover:text-white hover:bg-white/5',
+      'text-primary hover:bg-primary/[0.06]',
   }
 
   const sizes = {
-    sm: 'px-4 py-2 text-sm gap-1.5',
-    md: 'px-6 py-3 text-sm gap-2',
-    lg: 'px-8 py-4 text-base gap-2.5',
+    sm: 'gap-2 px-4 py-2.5 text-sm',
+    md: 'gap-2.5 px-5 py-3 text-sm',
+    lg: 'gap-3 px-6 py-3.5 text-base',
   }
 
   const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`
 
   if (href) {
     return (
-      <a href={href} className={classes} {...props}>
+      <a href={href} className={classes} aria-disabled={disabled} {...props}>
         {children}
       </a>
     )
   }
 
   return (
-    <button className={classes} {...props}>
+    <button className={classes} disabled={disabled} {...props}>
       {children}
     </button>
   )

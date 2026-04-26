@@ -1,185 +1,184 @@
-import { useEffect, useState } from 'react'
-import { ArrowRight, Play, CheckCircle2, Rocket, BarChart3, Zap, Handshake } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { heroStats, siteMeta } from '../../data/siteData'
 import Button from '../ui/Button'
 
-const benefits = [
-  { icon: Rocket, text: 'Visibilité optimisée' },
-  { icon: BarChart3, text: 'Prospects qualifiés' },
-  { icon: Zap, text: 'Solutions performantes' },
-  { icon: Handshake, text: 'Accompagnement continu' },
+const MotionDiv = motion.div
+const MotionH1 = motion.h1
+
+const stageCards = [
+  {
+    title: 'Custom software',
+    text: 'Applications metier, portails et outils utiles.',
+    className: 'lg:absolute lg:left-0 lg:top-10',
+  },
+  {
+    title: 'Network & telecom',
+    text: 'Infrastructure stable, securisee et documentee.',
+    className: 'lg:absolute lg:right-0 lg:top-20',
+  },
+  {
+    title: 'Training & support',
+    text: 'Prise en main, maintenance et suivi clair.',
+    className: 'lg:absolute lg:left-12 lg:bottom-10',
+  },
 ]
 
-const roles = ['sites web', 'apps mobiles', 'e-commerce', 'identités visuelles', 'stratégies SEO']
-
 function HeroSection() {
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-
-  // Animated text rotation
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length)
-    }, 3000)
-    return () => clearInterval(timer)
-  }, [])
-
-  // Trigger entrance animation
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsVisible(true), 100)
-    return () => clearTimeout(timeout)
-  }, [])
+  const shouldReduceMotion = useReducedMotion()
 
   return (
-    <section
-      id="accueil"
-      className="relative flex min-h-screen items-center overflow-hidden"
-    >
-      {/* Background layers */}
-      <div className="absolute inset-0">
-        {/* Base image */}
-        <img
-          src="/hero-bg.png"
-          alt=""
-          className="h-full w-full object-cover"
-          loading="eager"
-        />
-        {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-dark-900/90 via-dark-900/75 to-dark-900/90" />
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark-900 to-transparent" />
-      </div>
+    <section id="accueil" className="relative overflow-hidden pt-32 sm:pt-40">
+      <div className="absolute inset-x-0 top-0 h-[38rem] bg-[radial-gradient(circle_at_top,_rgba(0,113,227,0.16),_transparent_42%)]" />
 
-      {/* Animated ambient lights */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-32 top-1/4 h-[400px] w-[400px] animate-float rounded-full bg-primary/10 mix-blend-screen blur-[100px]" />
-        <div className="absolute -right-32 bottom-1/4 h-[350px] w-[350px] animate-float-delayed rounded-full bg-violet/10 mix-blend-screen blur-[100px]" />
-      </div>
+      <div className="shell section-padding relative">
+        <div className="mx-auto max-w-5xl text-center">
+          <MotionDiv
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <span className="section-eyebrow">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              {siteMeta.location} • {siteMeta.tagline}
+            </span>
+          </MotionDiv>
 
-      {/* Content */}
-      <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-32 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-16 lg:grid-cols-12">
+          <MotionH1
+            className="mx-auto mt-8 max-w-5xl text-5xl font-semibold leading-[0.95] text-dark-900 sm:text-6xl lg:text-[5.6rem]"
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.08, duration: 0.7, ease: 'easeOut' }}
+          >
+            Votre vision digitale.
+            <span className="block text-slate-400">Notre execution experte.</span>
+          </MotionH1>
 
-          {/* ── Left column: Main message ── */}
-          <div className={`lg:col-span-7 transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-            {/* Badge */}
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              <span className="text-sm font-medium text-primary-200">Agence digitale basée au Sénégal</span>
-            </div>
+          <motion.p
+            className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-muted sm:text-2xl"
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.16, duration: 0.7, ease: 'easeOut' }}
+          >
+            Logiciels sur mesure, formation IT, reseaux & telecom, maintenance et design graphique
+            dans une experience claire, minimale et haut de gamme.
+          </motion.p>
 
-            {/* Headline */}
-            <h1 className="mb-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-              Nous créons des
-              <br />
-              <span className="relative inline-block">
-                <span className="gradient-text">{roles[roleIndex]}</span>
-                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-primary via-violet to-accent opacity-50" />
-              </span>
-              <br />
-              qui génèrent des résultats.
-            </h1>
+          <MotionDiv
+            className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.24, duration: 0.7, ease: 'easeOut' }}
+          >
+            <Button href="#contact" size="lg">
+              Demander une consultation
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Button>
+            <Button href="#services" variant="secondary" size="lg">
+              Explorer les services
+            </Button>
+          </MotionDiv>
+        </div>
 
-            {/* Subtitle */}
-            <p className="mb-10 max-w-lg text-lg leading-relaxed text-slate-400">
-              Expériences digitales sur mesure pour valoriser votre entreprise
-              et transformer vos visiteurs en clients fidèles.
-            </p>
+        <MotionDiv
+          className="relative mt-16"
+          initial={{ opacity: 0, y: 26, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.25, duration: 0.8, ease: 'easeOut' }}
+        >
+          <div className="absolute left-1/2 top-10 h-72 w-[88%] -translate-x-1/2 rounded-full bg-primary/[0.12] blur-[110px]" />
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4">
-              <Button href="#contact" size="lg">
-                Démarrer un projet
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button href="#portfolio" variant="ghost" size="lg" className="group">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 transition-colors group-hover:border-primary/50 group-hover:bg-primary/10">
-                  <Play className="h-3 w-3 text-white" />
+          <div className="glass-panel-strong noise-overlay relative overflow-hidden p-6 sm:p-10">
+            <div className="absolute inset-0 mesh-bg opacity-90" />
+            <div className="absolute inset-0 subtle-grid opacity-[0.04]" />
+
+            <div className="relative grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+              <div className="max-w-xl">
+                <p className="text-sm font-medium uppercase tracking-[0.24em] text-slate-500">
+                  Everything works together.
+                </p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-dark-900 sm:text-5xl">
+                  Une execution plus nette. Une presence plus forte.
+                </h2>
+                <p className="mt-5 text-base leading-8 text-muted sm:text-lg">
+                  Nous structurons votre projet autour de priorites claires, de details soignes et
+                  d une sensation de fluidite a chaque etape.
+                </p>
+
+                <div className="mt-8 grid gap-3">
+                  {[
+                    'Une architecture simple a comprendre et facile a faire evoluer',
+                    'Des interfaces plus calmes, plus lisibles et plus premium',
+                    'Un accompagnement qui va du cadrage a la maintenance',
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-start gap-3 rounded-[1.5rem] border border-black/[0.06] bg-white/[0.8] px-4 py-3 shadow-[0_12px_24px_-20px_rgba(15,23,42,0.16)]"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-sm leading-7 text-slate-700">{item}</span>
+                    </div>
+                  ))}
                 </div>
-                Voir nos projets
-              </Button>
-            </div>
 
-            {/* Inline trust */}
-            <div className="mt-12 flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {['from-primary to-blue-400', 'from-violet to-purple-400', 'from-emerald-500 to-teal-400', 'from-pink-500 to-rose-400'].map((g, i) => (
-                  <div key={i} className={`flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br ${g} text-[10px] font-bold text-white ring-2 ring-dark-900`}>
-                    {['MK', 'PM', 'SL', 'JD'][i]}
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {heroStats.map((stat) => (
+                    <div key={stat.label} className="rounded-[1.6rem] bg-[#fbfbfd] p-4 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                      <p className="text-3xl font-semibold text-dark-900">{stat.value}</p>
+                      <p className="mt-1 text-sm font-medium text-slate-700">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative min-h-[32rem] rounded-[2.5rem] bg-[linear-gradient(180deg,#ffffff_0%,#f4f7fb_100%)] p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05)]">
+                <div className="flex items-center justify-between rounded-[1.5rem] border border-black/[0.06] bg-white px-4 py-3">
+                  <div>
+                    <p className="text-sm font-semibold text-dark-900">2A2C Tech Platform</p>
+                    <p className="text-xs text-slate-500">Software, infrastructure, training, support</p>
                   </div>
-                ))}
-              </div>
-              <div className="text-sm">
-                <span className="font-semibold text-white">35+ clients</span>
-                <span className="text-slate-500"> nous font confiance</span>
-              </div>
-            </div>
-          </div>
+                  <span className="rounded-full bg-[#f5f5f7] px-3 py-1 text-xs font-medium text-slate-600">
+                    Active
+                  </span>
+                </div>
 
-          {/* ── Right column: Bento grid ── */}
-          <div className={`hidden lg:col-span-5 lg:block transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
-            <div className="grid grid-cols-2 gap-3">
-              {/* Stat card 1 */}
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.08]">
-                <p className="mb-1 text-3xl font-extrabold text-white">50+</p>
-                <p className="text-xs text-slate-500">Projets livrés</p>
-              </div>
+                <div className="relative mt-5 flex h-[24rem] items-center justify-center overflow-hidden rounded-[2rem] border border-black/[0.06] bg-[radial-gradient(circle_at_top,_rgba(0,113,227,0.18),_transparent_36%),linear-gradient(180deg,#ffffff_0%,#f6f9fc_100%)]">
+                  <div className="absolute h-64 w-64 rounded-full border border-primary/20 bg-primary/[0.06]" />
+                  <div className="absolute h-40 w-40 rounded-full border border-primary/15 bg-white/90 shadow-[0_24px_48px_-28px_rgba(0,113,227,0.35)]" />
+                  <div className="absolute h-24 w-24 rounded-full bg-dark-900 text-white flex items-center justify-center text-center text-xs font-semibold tracking-[0.16em]">
+                    ORCHESTRATION
+                  </div>
 
-              {/* Stat card 2 */}
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.08]">
-                <p className="mb-1 text-3xl font-extrabold text-white">98%</p>
-                <p className="text-xs text-slate-500">Satisfaction client</p>
-              </div>
+                  <div className="absolute inset-8 hidden lg:block">
+                    {stageCards.map((card, index) => (
+                      <MotionDiv
+                        key={card.title}
+                        className={`w-56 rounded-[1.6rem] border border-black/[0.06] bg-white/[0.92] p-4 shadow-[0_18px_34px_-24px_rgba(15,23,42,0.18)] ${card.className}`}
+                        animate={shouldReduceMotion ? undefined : { y: index % 2 === 0 ? [-5, 7, -5] : [6, -5, 6] }}
+                        transition={shouldReduceMotion ? undefined : { duration: 7 + index, repeat: Infinity, ease: 'easeInOut' }}
+                      >
+                        <p className="text-sm font-semibold text-dark-900">{card.title}</p>
+                        <p className="mt-2 text-sm leading-6 text-slate-600">{card.text}</p>
+                      </MotionDiv>
+                    ))}
+                  </div>
 
-              {/* Benefits card - spans 2 cols */}
-              <div className="col-span-2 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm">
-                <p className="mb-4 text-sm font-semibold text-white">Ce que vous gagnez</p>
-                <div className="grid grid-cols-2 gap-3">
-                  {benefits.map((b) => {
-                    const Icon = b.icon
-                    return (
-                      <div key={b.text} className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-violet/20">
-                          <Icon className="h-4 w-4 text-primary-300" />
-                        </div>
-                        <span className="text-xs font-medium text-slate-300">{b.text}</span>
+                  <div className="absolute bottom-4 left-4 right-4 grid gap-3 lg:hidden">
+                    {stageCards.map((card) => (
+                      <div
+                        key={card.title}
+                        className="rounded-[1.3rem] border border-black/[0.06] bg-white/[0.92] p-4 text-left shadow-[0_18px_34px_-24px_rgba(15,23,42,0.18)]"
+                      >
+                        <p className="text-sm font-semibold text-dark-900">{card.title}</p>
+                        <p className="mt-2 text-sm leading-6 text-slate-600">{card.text}</p>
                       </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {/* Tech stack mini */}
-              <div className="col-span-2 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                    <span className="text-xs font-medium text-slate-300">Stack moderne</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    {['React', 'Node', 'Figma'].map((t) => (
-                      <span key={t} className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-400">
-                        {t}
-                      </span>
                     ))}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-[10px] font-medium uppercase tracking-widest text-slate-600">Scroll</span>
-          <div className="flex h-7 w-4 items-start justify-center rounded-full border border-white/15 p-1">
-            <div className="h-1.5 w-1 animate-bounce rounded-full bg-white/30" />
-          </div>
-        </div>
+        </MotionDiv>
       </div>
     </section>
   )

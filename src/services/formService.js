@@ -1,12 +1,5 @@
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgvkoznv'
 
-/**
- * Sends form data to Formspree endpoint.
- * Separates API logic from UI components.
- *
- * @param {Object} formData - The form fields to submit
- * @returns {Promise<{success: boolean, message: string}>}
- */
 export async function submitContactForm(formData) {
   try {
     const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -24,12 +17,12 @@ export async function submitContactForm(formData) {
 
     return {
       success: true,
-      message: 'Message envoyé avec succès ! Nous vous recontacterons rapidement.',
+      message: 'Message envoye avec succes. Nous revenons vers vous tres vite.',
     }
   } catch {
     return {
       success: false,
-      message: 'Échec de l\'envoi. Contactez-nous par WhatsApp ou email.',
+      message: 'Envoi impossible pour le moment. Utilisez WhatsApp ou l email en alternative.',
     }
   }
 }
